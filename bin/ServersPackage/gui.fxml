@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="434.0" prefWidth="528.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ServersPackage.Controler">
+   <children>
+      <Label fx:id="texLabelTitle" layoutX="75.0" layoutY="43.0" text="Title">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <ListView fx:id="listViewLogs" layoutX="38.0" layoutY="254.0" prefHeight="166.0" prefWidth="484.0" />
+      <Label fx:id="LabelValue2" layoutX="230.0" layoutY="208.0" text="Logs">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Button fx:id="buttonRegister" layoutX="39.0" layoutY="155.0" mnemonicParsing="false" onAction="#buttonRegisterClicket" prefHeight="46.0" prefWidth="207.0" text="Register" />
+      <Button fx:id="buttonUnregister" layoutX="280.0" layoutY="155.0" mnemonicParsing="false" onAction="#buttonUnegisterClicket" prefHeight="46.0" prefWidth="207.0" text="Unregister" />
+   </children>
+</Pane>

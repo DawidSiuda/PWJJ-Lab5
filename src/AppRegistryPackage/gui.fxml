@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="612.0" prefWidth="529.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AppRegistryPackage.Controler">
+   <children>
+      <ListView fx:id="listViewServerList" layoutX="17.0" layoutY="121.0" prefHeight="232.0" prefWidth="239.0" />
+      <Label fx:id="LabelValue" layoutX="17.0" layoutY="28.0" text="AppServerRegister">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <ListView fx:id="listViewClientsList" layoutX="273.0" layoutY="121.0" prefHeight="232.0" prefWidth="239.0" />
+      <Label fx:id="LabelValue1" layoutX="83.0" layoutY="79.0" text="Servers">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="LabelValue2" layoutX="349.0" layoutY="79.0" text="Clients">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <ListView fx:id="listViewLogs" layoutX="17.0" layoutY="419.0" prefHeight="181.0" prefWidth="493.0" />
+      <Label fx:id="LabelValue21" layoutX="239.0" layoutY="374.0" text="Logs">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>

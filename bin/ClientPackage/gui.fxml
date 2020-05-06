@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="723.0" prefWidth="838.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ClientPackage.Controler">
+   <children>
+      <ListView fx:id="listViewGeneratedData" layoutX="469.0" layoutY="200.0" prefHeight="274.0" prefWidth="139.0" />
+      <Label fx:id="labelTitle" layoutX="396.0" layoutY="43.0" text="Title">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="LabelValue1" layoutX="488.0" layoutY="175.0" prefHeight="21.0" prefWidth="107.0" text="Generated data">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <ListView fx:id="listViewLogs" layoutX="17.0" layoutY="526.0" prefHeight="181.0" prefWidth="804.0" />
+      <Label fx:id="LabelValue21" layoutX="400.0" layoutY="496.0" text="Logs">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="buttonGenerate" layoutX="364.0" layoutY="239.0" mnemonicParsing="false" onAction="#buttonGenerateClicked" text="Generate data" />
+      <Label fx:id="LabelValue11" layoutX="672.0" layoutY="175.0" text="Received data">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <ListView fx:id="listViewReceivedData" layoutX="649.0" layoutY="200.0" prefHeight="274.0" prefWidth="139.0" />
+      <TextField fx:id="textFieldHowManyData" layoutX="364.0" layoutY="206.0" prefHeight="25.0" prefWidth="92.0" />
+      <Button fx:id="buttonSort" layoutX="14.0" layoutY="312.0" mnemonicParsing="false" onAction="#buttonSortClicked" prefHeight="25.0" prefWidth="129.0" text="Sort" />
+      <Button fx:id="buttonRefreshServerList" layoutX="14.0" layoutY="279.0" mnemonicParsing="false" onAction="#buttonRefreshServerListClicked" prefHeight="25.0" prefWidth="129.0" text="Refresh server list" />
+      <TableView fx:id="tableViewServerMap" layoutX="158.0" layoutY="200.0" prefHeight="274.0" prefWidth="177.0" />
+      <Separator layoutX="3.0" layoutY="496.0" prefHeight="3.0" prefWidth="838.0" />
+   </children>
+</Pane>
