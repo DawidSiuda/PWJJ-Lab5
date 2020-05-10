@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Random;
 
 import Interfaces.MyRegistryInterfaces;
+import Interfaces.SortClassInterface;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
@@ -24,17 +25,17 @@ public class Controler {
 
 	public Label labelTitle;
 	public Label labelTitle2;
-	
+
 	public TextField textFieldHowManyData;
-	
+
 	public Button buttonGenerate;
 	public Button buttonRefreshServerList;
 	public Button buttonSort;
-	
+
 	public TableView tableViewServerMap;
 	public TableColumn<Integer, ServerRepresentation> tableColumnPort;
 	public TableColumn<String, ServerRepresentation> tableColumnDescription;
-	
+
 	public ListView<Integer> listViewGeneratedData;
 	public List<Integer> generatedData = new ArrayList<Integer>();
 
@@ -42,19 +43,19 @@ public class Controler {
 	public List<Integer> receivedData = new ArrayList<Integer>();
 
 	public ListView<String> listViewLogs;
-	
+
 	MyRegistryInterfaces myRegistryInterfaces;
 	int port;
-	
-	private Map<Integer,String> serverMap = new HashMap<Integer,String>();
-	
+
+	private Map<Integer, String> serverMap = new HashMap<Integer, String>();
+
 	ObservableList<ServerRepresentation> observableListServers = FXCollections.observableArrayList();
 
 	public void initialize() throws RemoteException {
 		System.out.println("FUNCTION: initialize");
 
 		textFieldHowManyData.setText("15");
-		
+
 		//
 		// Connect to register.
 		//
@@ -66,7 +67,7 @@ public class Controler {
 
 			port = myRegistryInterfaces.addClient("Client");
 
-			listViewLogs.getItems().add("Received port: " + port);
+			log("Received port: " + port);
 
 			String name = "Client " + port;
 			labelTitle.setText(name);
@@ -77,16 +78,16 @@ public class Controler {
 		//
 		// Generate table.
 		//
-		
+
 		tableColumnPort = new TableColumn<Integer, ServerRepresentation>("Port");
 		tableColumnPort.setCellValueFactory(new PropertyValueFactory<>("port"));
 
 		tableColumnDescription = new TableColumn<String, ServerRepresentation>("Description");
 		tableColumnDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
-		
+
 		tableViewServerMap.getColumns().add(tableColumnPort);
 		tableViewServerMap.getColumns().add(tableColumnDescription);
-		
+
 		buttonRefreshServerListClicked();
 	}
 
@@ -103,6 +104,7 @@ public class Controler {
 			return;
 		}
 
+		generatedData.clear();
 		for (int i = 0; i < value; i++) {
 			generatedData.add(random.nextInt(1000000));
 		}
@@ -120,10 +122,10 @@ public class Controler {
 		} catch (RemoteException e) {
 			log("Error at function buttonRefreshServerListClicked.");
 		}
-		
+
 		tableViewServerMap.getItems().clear();
-		
-		for(Integer val: serverMap.keySet()) {
+
+		for (Integer val : serverMap.keySet()) {
 			log(String.valueOf(val));
 			tableViewServerMap.getItems().add(new ServerRepresentation(val, serverMap.get(val)));
 		}
@@ -131,12 +133,49 @@ public class Controler {
 
 	public void buttonSortClicked() {
 		log("FUNCTION: buttonSortClicked");
-		
-		ServerRepresentation ser = (ServerRepresentation)tableViewServerMap.getSelectionModel().getSelectedItem();
-		
+
+		ServerRepresentation ser = (ServerRepresentation) tableViewServerMap.getSelectionModel().getSelectedItem();
+
+		if (ser == null) {
+			log("Cannot choose server, check if you selected correct server.");
+			MyMessage.show("Cannot choose server, check if you selected correct server.");
+			return;
+		}
+
 		log("Going to use server on port: " + ser.getPort());
-		
-		// send data here
+
+		//
+		// Send data here
+		//
+
+		try {
+			String serverAddress = "rmi://localhost:" + ser.getPort() + "/SortServer";
+
+			log("Address: " + serverAddress);
+			
+			SortClassInterface sortClassInterface = (SortClassInterface) Naming.lookup(serverAddress);
+
+			log("Connected succesfull.");
+
+			receivedData = sortClassInterface.solve(generatedData);
+
+			reloadlistViewReceivedData();
+
+		} catch (Exception e) {
+			log("Cannot connect to hosted class.");
+			MyMessage.show("Connection error.");
+			return;
+		}
+
+
+//		//public List<Integer> receivedData = new ArrayList<Integer>();
+//		port = myRegistryInterfaces.addServer("Server");
+//
+//		listViewLogs.getItems().add("Received port: " + port);
+//
+//		name = "Server " + port;
+//
+//		texLabelTitle.setText(name);
 	}
 
 	private void reloadlistViewGeneratedData() {
@@ -148,12 +187,25 @@ public class Controler {
 			listViewGeneratedData.getItems().add(var);
 		}
 	}
-	
+
+	private void reloadlistViewReceivedData() {
+		log("FUNCTION: reloadlistViewReceivedData");
+
+		listViewReceivedData.getItems().clear();
+
+		for (Integer var : receivedData) {
+			listViewReceivedData.getItems().add(var);
+		}
+	}
+
 	private void log(String str) {
 		listViewLogs.getItems().add(str);
+//		int size = listViewLogs.getItems().size();
+//		if (size > 2)
+//			listViewLogs.scrollTo(size - 1);
 		System.out.println(str);
 	}
-	
+
 	public void end() {
 		log("FUNCTION: end().");
 		try {
