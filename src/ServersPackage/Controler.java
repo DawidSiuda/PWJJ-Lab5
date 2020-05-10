@@ -26,12 +26,12 @@ public class Controler {
 	private QuickSorter quickSorter;
 
 	private Registry regristry;
-//	Registry regristry;
 
-	String name;
+	private String name;
 
-	int port;
-	MyRegistryInterfaces myRegistryInterfaces;
+	private int port;
+	
+	private MyRegistryInterfaces myRegistryInterfaces;
 
 	public Controler() {
 	}
@@ -67,7 +67,7 @@ public class Controler {
 
 			listViewLogs.getItems().add("Connected to registry");
 
-			port = myRegistryInterfaces.addServer("Server");
+			port = myRegistryInterfaces.addServer("Server", "QuickSort");
 
 			listViewLogs.getItems().add("Received port: " + port);
 
@@ -110,16 +110,8 @@ public class Controler {
 		return true;
 	}
 
-//	public void buttonUnegisterClicket() {
-//		System.out.println("FUNCTION: buttonUnegisterClicket");
-//		return;
-//	}
-
 	private void log(String str) {
 		listViewLogs.getItems().add(str);
-//		int size = listViewLogs.getItems().size();
-//		if (size > 2)
-//			listViewLogs.scrollTo(size - 1);
 		System.out.println(str);
 	}
 
@@ -136,5 +128,4 @@ public class Controler {
 			}
 		}
 	}
-
 }

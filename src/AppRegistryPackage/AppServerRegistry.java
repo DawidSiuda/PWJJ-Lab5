@@ -14,8 +14,6 @@ public class AppServerRegistry extends Application {
 	        primaryStage.setTitle("AppServerRegister");
 
 			primaryStage.setScene(new Scene(root, 529, 612));
-			// Control controller = loader.getController();
-			//primaryStage.setOnHidden(e -> controller.shutdown());
 	        primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();

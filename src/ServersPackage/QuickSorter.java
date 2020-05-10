@@ -13,21 +13,19 @@ import javafx.scene.control.ListView;
 public class QuickSorter extends UnicastRemoteObject implements SortClassInterface {
 
 	private static final long serialVersionUID = 1L;
-	private List<Integer> list;
 
 	public QuickSorter() throws RemoteException {
 		super();
-		// serverInfo = new ServerInfoSorter(serverName, "QuickSort");
 	}
 
 	public QuickSorter(String serverName) throws RemoteException {
 		super();
-		// serverInfo = new ServerInfoSorter(serverName, "QuickSort");
 	}
 
 	@Override
 	public List<Integer> solve(List<Integer> inputList) throws RemoteException {
 
+		List<Integer> list = null;
 		try {
 			if (inputList == null) {
 				System.out.println("ERROR: List is nullptr");
@@ -83,10 +81,4 @@ public class QuickSorter extends UnicastRemoteObject implements SortClassInterfa
 	}
 
 	ListView<String> listViewLogs;
-
-//	private ServerInfo serverInfo;
-//
-//	public ServerInfo getServerInfo() {
-//		return serverInfo;
-//	} 
 }

@@ -63,14 +63,14 @@ public class Controler extends UnicastRemoteObject implements MyRegistryInterfac
 	}
 
 	@Override
-	public void removeClient(int port) {
+	public Boolean removeClient(int port) {
 		try {
 			for (Integer val : clientsMap.keySet()) {
 				if (val == port) {
 					clientsMap.remove(val);
 					log("Removed client at port: " + port);
 					reloadClientsList();
-					return;
+					return true;
 				}
 			}
 		} catch (Exception e) {
@@ -79,10 +79,11 @@ public class Controler extends UnicastRemoteObject implements MyRegistryInterfac
 
 		log("Cannot find client at port: " + port);
 
+		return false;
 	}
 
 	@Override
-	public int addServer(String ServerDescription) {
+	public int addServer(String name, String description) {
 
 		try {
 			log("Registering new server...");
@@ -92,21 +93,24 @@ public class Controler extends UnicastRemoteObject implements MyRegistryInterfac
 
 			log("Chose port " + serverPort + " for asking server.");
 
-			if (ServerDescription == null)
-				ServerDescription = "SortServer";
+			if (name == null)
+				name = "SortServer";
+			if (description == null)
+				description = "";
 
-			serverMap.put(serverPort, ServerDescription);
+			serverMap.put(serverPort, name + " "+ description );
 			reloadServerList();
 
 			log("Added server with port: " + serverPort);
 		} catch (Exception e) {
 			log("ERROR: Problems during adding new server.");
+			return 0;
 		}
 		return portOfRegistry - appCounter;
 	}
 
 	@Override
-	public void removeServer(int port) {
+	public Boolean removeServer(int port) {
 
 		try {
 			for (Integer val : serverMap.keySet()) {
@@ -114,7 +118,7 @@ public class Controler extends UnicastRemoteObject implements MyRegistryInterfac
 					serverMap.remove(val);
 					log("Removed server at port: " + port);
 					reloadServerList();
-					return;
+					return true;
 				}
 			}
 		} catch (Exception e) {
@@ -123,6 +127,7 @@ public class Controler extends UnicastRemoteObject implements MyRegistryInterfac
 
 		log("Cannot find server at port: " + port);
 
+		return false;
 	}
 
 	private void reloadServerList() {
@@ -145,16 +150,11 @@ public class Controler extends UnicastRemoteObject implements MyRegistryInterfac
 	}
 
 	public void shutdown() {
-		// cleanup code here...
 		System.out.println("EndProgram");
-		// regristry.stop();
 	}
 
 	private void log(String str) {
 			listViewLogs.getItems().add(str);
-//			int size = listViewLogs.getItems().size();
-//			if (size > 2)
-//				listViewLogs.scrollTo(size - 1);
 			System.out.println(str);
 	}
 

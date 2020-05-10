@@ -13,7 +13,6 @@ import Interfaces.SortClassInterface;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
@@ -138,7 +137,7 @@ public class Controler {
 
 		if (ser == null) {
 			log("Cannot choose server, check if you selected correct server.");
-			MyMessage.show("Cannot choose server, check if you selected correct server.");
+			MyMessage.show("Error, Check if you selected server.");
 			return;
 		}
 
@@ -166,16 +165,6 @@ public class Controler {
 			MyMessage.show("Connection error.");
 			return;
 		}
-
-
-//		//public List<Integer> receivedData = new ArrayList<Integer>();
-//		port = myRegistryInterfaces.addServer("Server");
-//
-//		listViewLogs.getItems().add("Received port: " + port);
-//
-//		name = "Server " + port;
-//
-//		texLabelTitle.setText(name);
 	}
 
 	private void reloadlistViewGeneratedData() {
@@ -200,9 +189,6 @@ public class Controler {
 
 	private void log(String str) {
 		listViewLogs.getItems().add(str);
-//		int size = listViewLogs.getItems().size();
-//		if (size > 2)
-//			listViewLogs.scrollTo(size - 1);
 		System.out.println(str);
 	}
 
